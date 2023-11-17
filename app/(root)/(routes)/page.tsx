@@ -4,7 +4,7 @@ import { ModeToggle } from "@/components/mood-toggle";
 export default function Home() {
   return (
     <main>
-      <UserButton afterSignOutUrl="/"/>
+      {/* <UserButton afterSignOutUrl="/"/> */}
       <ModeToggle/>
     </main>
   )
