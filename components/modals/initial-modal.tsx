@@ -23,7 +23,7 @@ import {
   } from "@/components/ui/form";
 import { Button } from '@/components/ui/button'
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import { FileUpload } from "@/components/file-upload"
 
 const formSchema = z.object({
     name: z.string().min(1, {
@@ -70,7 +70,11 @@ const InitialModal = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        file Upload
+                        <FileUpload
+                          endpoint="serverImage"
+                          value={field.value}
+                          onChange={field.onChange}
+                        />
                       </FormControl>
                     </FormItem>
                   )}
