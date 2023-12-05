@@ -1,29 +1,30 @@
 "use client"
  
 import * as z from "zod"
-import React from 'react'
+import axios from "axios"
+import React, { useEffect, useState } from 'react'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-    DialogFooter
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter
 } from "@/components/ui/dialog"
 import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage
-  } from "@/components/ui/form";
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage
+} from "@/components/ui/form";
 import { Button } from '@/components/ui/button'
 import { Input } from "@/components/ui/input"
 import { FileUpload } from "@/components/file-upload"
+import { useRouter } from "next/navigation"
 
 const formSchema = z.object({
     name: z.string().min(1, {
@@ -36,18 +37,38 @@ const formSchema = z.object({
   
 
 const InitialModal = () => {
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
-        defaultValues: {
-          name: "",
-        },
-      })
+  const [isMounted, setIsMounted] = useState(false);
 
-    function onSubmit(values: z.infer<typeof formSchema>) {
-        // Do something with the form values.
-        // ✅ This will be type-safe and validated.
-        console.log(values)
+  const router = useRouter();
+
+  useEffect(()=>{
+    setIsMounted(true);
+  },[])
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+    },
+  })
+
+  const isLoading = form.formState.isSubmitting;
+
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      const serverData = await axios.post("/api/servers", values);
+      console.log("serverData", serverData)
+      form.reset();
+      router.refresh();
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
     }
+  }
+
+  if(!isMounted){
+    return null;
+  }
 
   return (
     <Dialog open>
@@ -104,7 +125,7 @@ const InitialModal = () => {
               />
             </div>
             <DialogFooter className="bg-gray-100 px-6 py-4 flex item-center w-full">
-              <Button variant="primary">
+              <Button variant="primary" disabled={isLoading}>
                 Create
               </Button>
             </DialogFooter>
