@@ -4,7 +4,6 @@ import { db } from "./db";
 
 export const currentProfile = async () => {
     const { userId } = auth();
-    console.log("userId", userId)
     if (!userId) {
         return null;
     }
@@ -14,8 +13,6 @@ export const currentProfile = async () => {
             userId: userId
         }
     })
-
-    console.log("profile", profile)
 
     return profile;
 }
