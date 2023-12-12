@@ -49,6 +49,7 @@ const InitialModal = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
+      imageUrl : ""
     },
   })
 
@@ -56,7 +57,7 @@ const InitialModal = () => {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      const serverData = await axios.post("/api/servers", values);
+      await axios.post("/api/servers", values);
 
       form.reset();
       router.refresh();

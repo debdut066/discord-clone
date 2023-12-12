@@ -6,7 +6,7 @@ import InitialModal from '@/components/modals/initial-modal';
 
 const page = async () => {
   const profile = await initialProfile();
- 
+
   const user = await db.server.findFirst({
     where: {
       members: {
