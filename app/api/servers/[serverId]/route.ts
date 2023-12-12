@@ -8,8 +8,8 @@ export async function PATCH(
     { params }: { params: { serverId: string } }
 ) {
     try {
-
         const profile = await currentProfile();
+        const { name, imageUrl } = await req.json()
 
         if (!profile) {
             return new NextResponse("Unauthorized", { status: 401 });
@@ -25,7 +25,8 @@ export async function PATCH(
                 profileId: profile.id
             },
             data: {
-                inviteCode: uuidv4(),
+                name,
+                imageUrl,
             },
         });
 
@@ -35,8 +36,4 @@ export async function PATCH(
         console.log("[SERVER_ID]", error);
         return new NextResponse("Internal Error", { status: 500 });
     }
-}
-
-function uuidv4(): any {
-    throw new Error("Function not implemented.");
 }
