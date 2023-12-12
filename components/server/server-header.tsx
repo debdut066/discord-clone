@@ -37,15 +37,13 @@ export function ServerHeader({ server, role }: ServerHeaderProps) {
             <DropdownMenuContent
                 className="w-56 text-xs font-medium text-black dark:text-neutral-400 space-y-[2px"
             >
-                { (isModerator || isAdmin) && (
-                    <DropdownMenuItem
-                        className="text-indigo-600 dark:text-indigo-400 px-3 py-2 text-sm cursor-pointer"
-                        onClick={() => onOpen("invite", { server })}
-                    >
-                        Invite People
-                        <UserPlus className="h-4 w-4 ml-auto"/>
-                    </DropdownMenuItem>
-                )}
+                <DropdownMenuItem
+                    className="text-indigo-600 dark:text-indigo-400 px-3 py-2 text-sm cursor-pointer"
+                    onClick={() => onOpen("invite", { server })}
+                >
+                    Invite People
+                    <UserPlus className="h-4 w-4 ml-auto"/>
+                </DropdownMenuItem>
 
                 { isAdmin && (
                     <DropdownMenuItem
@@ -86,7 +84,7 @@ export function ServerHeader({ server, role }: ServerHeaderProps) {
                         <Trash className="h-4 w-4 ml-auto"/>
                     </DropdownMenuItem>
                 )}
-                <DropdownMenuSeparator/>
+                { isAdmin && <DropdownMenuSeparator/>}
                 {isAdmin && (
                     <DropdownMenuItem
                         className="text-rose-500 px-3 py-2 text-sm cursor-pointer"
