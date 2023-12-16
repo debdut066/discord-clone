@@ -53,8 +53,25 @@ export function MembersModal(){
     const { server } = data as { server : ServerWithMemberWithProfiles};
     const isModal = isOpen && type === "members";
 
-    function onKick(memberId : string){
+    async function onKick(memberId : string){
+        try{
+            setLoadingId(memberId);
+            const url = qs.stringify({
+                url : `/api/members/${memberId}`,
+                query : {
+                    serverId : server?.id
+                }
+            })
+            const response = await axios.delete(url);
+            console.log("response", response)
+            router.refresh();
+            onOpen("members", { server : response.data })
 
+        }catch(error){
+            console.log(error);
+        }finally{
+            setLoadingId("");
+        }
     }
 
     async function onRoleChange(memberId : string, role : MemberRole){
