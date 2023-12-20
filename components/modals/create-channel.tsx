@@ -81,15 +81,14 @@ export function CreateChannel(){
 
     async function onSubmit(values : z.infer<typeof formSchema>){
         try {
-            const url = qs.stringify({
-                url : `api/channels`,
-                query : {
-                    serverId : params?.serverId
-                }
-            })  
-
+            const url = qs.stringifyUrl({
+              url: "/api/channels",
+              query: {
+                serverId: params?.serverId
+              }
+            });
             await axios.post(url, values);
-
+      
             form.reset();
             router.refresh();
             onClose();
