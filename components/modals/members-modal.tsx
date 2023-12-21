@@ -63,7 +63,6 @@ export function MembersModal(){
                 }
             })
             const response = await axios.delete(url);
-            console.log("response", response)
             router.refresh();
             onOpen("members", { server : response.data })
 
@@ -74,24 +73,24 @@ export function MembersModal(){
         }
     }
 
-    async function onRoleChange(memberId : string, role : MemberRole){
+    const onRoleChange = async (memberId: string, role: MemberRole) => {
         try {
-            setLoadingId(memberId)
-            const url = qs.stringify({
-                url : `/api/members/${memberId}`,
-                query : {
-                    serverId : server?.id
-                }
-            })
-
-            const response = await axios.patch(url, { role })
-            console.log("response", response.data)
-            router.refresh();
-            onOpen("members", { server: response.data });
+          setLoadingId(memberId);
+          const url = qs.stringifyUrl({
+            url: `/api/members/${memberId}`,
+            query: {
+              serverId: server?.id,
+            }
+          });
+    
+          const response = await axios.patch(url, { role });
+    
+          router.refresh();
+          onOpen("members", { server: response.data });
         } catch (error) {
-            console.log(error);
-        } finally{
-            setLoadingId("");
+          console.log(error);
+        } finally {
+          setLoadingId("");
         }
     }
 
