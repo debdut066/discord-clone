@@ -1,7 +1,8 @@
-import React from 'react'
+
 import { db } from '@/lib/db';
 import { currentProfile } from '@/lib/current_profile';
 import { redirectToSignIn } from '@clerk/nextjs';
+import { redirect } from 'next/navigation';
 
 interface ServerIdPageProps {
   params : {
@@ -37,9 +38,13 @@ async function ServerIdPage({ params } : ServerIdPageProps){
     }
   })
 
-  return (
-    <div>ServerIdPage</div>
-  )
+  const initialChannel = server?.channels[0];
+
+  if(initialChannel?.name !== "general"){
+    return null;
+  }
+
+  return redirect(`/servers/${params.serverId}/channels/${initialChannel.id}`)
 }
 
 export default ServerIdPage;
