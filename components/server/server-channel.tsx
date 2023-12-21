@@ -39,7 +39,7 @@ export function ServerChannel({
     }
 
     function clickHandler(){
-        router.push(`/servers/${params?.serverId}/channel/${channel.id}`)
+        router.push(`/servers/${params?.serverId}/channels/${channel.id}`)
     }
     
     return (
