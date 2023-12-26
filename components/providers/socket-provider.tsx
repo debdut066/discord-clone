@@ -22,14 +22,17 @@ export function useSocket(){
     return useContext(SocketContext);
 } 
 
-export function SocketProvider({ children } : { children : React.ReactNode}){
-    const [socket, setSocket] = useState(null);
-    const [isConnected, setIsConnected] = useState(false);
+export function SocketProvider(
+    { children } : 
+    { children : React.ReactNode}
+    ){
+    const [socket, setSocket] = useState<any | null>(null);
+    const [isConnected, setIsConnected] = useState<boolean>(false);
 
     useEffect(()=>{
         const socketInstance = new (ClientIO as any)(process.env.NEXT_PUBLIC_SITE_URL!, {
-            path : "/api/socket/io",
-            addTrailingSlash : false,
+            path: "/api/socket/io",
+            addTrailingSlash: false,
         });
 
         socketInstance.on("connect", () => {
