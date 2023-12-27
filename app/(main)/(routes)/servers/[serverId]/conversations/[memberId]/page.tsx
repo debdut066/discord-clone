@@ -5,6 +5,7 @@ import { db } from "@/lib/db";
 import { currentProfile } from "@/lib/current_profile";
 import { getOrCreateConversation } from "@/lib/conversation";
 import { ChatHeader } from "@/components/chat/chat-header";
+import { ChatInput } from "@/components/chat/chat-input";
 
 interface MemberIdPageProps { 
     params : {
@@ -54,6 +55,10 @@ async function MemberIdPage({
                 serverId={params.serverId}
                 type="conversation"
                 imageUrl={otherMember.profile.imageUrl}
+            />
+            <ChatInput
+                name={otherMember.profile.name}
+                type="conversation"
             />
         </div>
     )
