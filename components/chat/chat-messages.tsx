@@ -97,7 +97,12 @@ function ChatMessages({
                                 currentMember={member}
                                 member={message.member}
                                 content={message.content}
+                                fileUrl={message.fileUrl}
+                                deleted={message.deleted}
+                                isUpdated={message.createdAt !== message.updatedAt}
                                 timestamp={format(new Date(message.createdAt), DATE_FORMAT)}
+                                socketUrl={socketUrl}
+                                socketQuery={socketQuery}
                             />
                         ))}
                     </Fragment>
