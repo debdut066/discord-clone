@@ -139,6 +139,7 @@ function ChatMessages({
                     </Fragment>
                 ))}
             </div>
+            <div ref={bottomRef} />
         </div>
     )
 }
