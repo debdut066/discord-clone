@@ -1,3 +1,4 @@
+"use-client"
 
 import { useEffect } from "react";
 import { useQueryClient } from "@tanstack/react-query";
@@ -11,7 +12,7 @@ type ChatSocketProps = {
     queryKey: string;
 }
 
-type MessageWithMemberProfile = Message & {
+type MessageWithMemberWithProfile = Message & {
     member: Member & {
         profile: Profile
     }
@@ -31,7 +32,7 @@ export function useChatSocket({
             return;
         }
 
-        socket.on(updateKey, (message: MessageWithMemberProfile) => {
+        socket.on(updateKey, (message: MessageWithMemberWithProfile) => {
             queryClient.setQueryData([queryKey], (oldData: any) => {
                 if (!oldData || !oldData.pages || oldData.pages.length === 0) {
                     return oldData;
@@ -40,7 +41,7 @@ export function useChatSocket({
                 const newData = oldData.pages.map((page: any) => {
                     return {
                         ...page,
-                        items: page.items.map((item: MessageWithMemberProfile) => {
+                        items: page.items.map((item: MessageWithMemberWithProfile) => {
                             if (item.id === message.id) {
                                 return message;
                             }
@@ -56,7 +57,7 @@ export function useChatSocket({
             })
         });
 
-        socket.on(addKey, (message: MessageWithMemberProfile) => {
+        socket.on(addKey, (message: MessageWithMemberWithProfile) => {
             queryClient.setQueryData([queryKey], (oldData: any) => {
                 if (!oldData || !oldData.pages || oldData.pages.length === 0) {
                     return {
