@@ -99,7 +99,7 @@ export function CreateChannel(){
 
     return (
         <Dialog open={isModelOpen} onOpenChange={handleClose}>
-            <DialogContent>
+            <DialogContent className="dark:bg-[#323338]">
                 <DialogHeader>
                     <DialogTitle>
                         Create channel
@@ -118,7 +118,7 @@ export function CreateChannel(){
                                         </FormLabel>
                                         <FormControl>
                                             <Input
-                                                className="focus-visible:ring-0 focus-visible:ring-offset-0"
+                                                className="dark:bg-[#43434b] focus-visible:ring-0 focus-visible:ring-offset-0"
                                                 placeholder="Enter channel name"
                                                 disabled={isLoading}
                                                 {...field}
@@ -141,17 +141,17 @@ export function CreateChannel(){
                                         >
                                             <FormControl>
                                                 <SelectTrigger
-                                                    className="focus:ring-0 ring-offset-0 focus:ring-offset-0 capitalize outline-none"
+                                                    className="dark:bg-[#43434b] focus:ring-0 ring-offset-0 focus:ring-offset-0 capitalize outline-none"
                                                 >
                                                     <SelectValue placeholder="Select a channel type" />
                                                 </SelectTrigger>
                                             </FormControl>
-                                            <SelectContent>
+                                            <SelectContent className="dark:bg-[#43434b]">
                                                 {Object.values(ChannelType).map((type) => (
                                                     <SelectItem
                                                         key={type}
                                                         value={type}
-                                                        className="capitalize"
+                                                        className="capitalize dark:bg-[#43434b]"
                                                     >
                                                         {type.toLowerCase()}
                                                     </SelectItem>

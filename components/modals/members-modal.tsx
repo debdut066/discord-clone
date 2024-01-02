@@ -75,28 +75,28 @@ export function MembersModal(){
 
     const onRoleChange = async (memberId: string, role: MemberRole) => {
         try {
-          setLoadingId(memberId);
-          const url = qs.stringifyUrl({
-            url: `/api/members/${memberId}`,
-            query: {
-              serverId: server?.id,
-            }
-          });
-    
-          const response = await axios.patch(url, { role });
-    
-          router.refresh();
-          onOpen("members", { server: response.data });
+            setLoadingId(memberId);
+            const url = qs.stringifyUrl({
+                url: `/api/members/${memberId}`,
+                query: {
+                serverId: server?.id,
+                }
+            });
+        
+            const response = await axios.patch(url, { role });
+        
+            router.refresh();
+            onOpen("members", { server: response.data });
         } catch (error) {
-          console.log(error);
+            console.log(error);
         } finally {
-          setLoadingId("");
+            setLoadingId("");
         }
     }
 
     return(
         <Dialog open={isModal} onOpenChange={onClose}>
-            <DialogContent className="p-0 overflow-hidden">
+            <DialogContent className="dark:bg-[#323338] p-0 overflow-hidden">
                 <DialogHeader className="pt-8 px-6">
                     <DialogTitle className="text-2xl text-center font-bold">
                         Manage Members
@@ -145,7 +145,7 @@ export function MembersModal(){
                                                     Guest
                                                     {member.role === "GUEST" && (
                                                         <Check
-                                                        className="h-4 w-4 ml-auto"
+                                                            className="h-4 w-4 ml-auto"
                                                         />
                                                     )}
                                                 </DropdownMenuItem>
@@ -156,7 +156,7 @@ export function MembersModal(){
                                                     Moderator
                                                     {member.role === "MODERATOR" && (
                                                         <Check
-                                                        className="h-4 w-4 ml-auto"
+                                                            className="h-4 w-4 ml-auto"
                                                         />
                                                     )}
                                                 </DropdownMenuItem>

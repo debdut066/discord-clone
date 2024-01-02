@@ -6,11 +6,13 @@ import { InviteModal } from "../modals/invite-modal";
 import { EditServerModal } from "../modals/edit-server-modal";
 import { MembersModal } from "../modals/members-modal";
 import { CreateChannel } from "../modals/create-channel";
-import { EditChannel } from "../modals/edit-channel";
-import { DeleteChannel } from "../modals/delete-channel";
-import { DeleteServerModal } from "../modals/delete-modal";
+import { EditChannel } from "../modals/edit-channel-modal";
+import { DeleteChannel } from "../modals/delete-channel-modal";
+import { DeleteServerModal } from "../modals/delete-server-modal";
 import { MessageFileModal } from "../modals/message-file-modal";
 import { DeleteMessageModal } from "../modals/delete-message-modal";
+import { JoinServer } from "../modals/join-server-modal";
+import { LeaveServer } from "../modals/leave-server-modal";
 
 export const ModalProvider = () => {
     const [isMounted, setIsMounted] = useState(false);
@@ -25,15 +27,17 @@ export const ModalProvider = () => {
 
     return (
         <>
-            <CreateServerModal/>
+            <JoinServer/>
+            <EditChannel/>
+            <LeaveServer/>
             <InviteModal/>
-            <EditServerModal/>
             <MembersModal/>
             <CreateChannel/>
-            <DeleteServerModal/>
-            <EditChannel/>
             <DeleteChannel/>
+            <EditServerModal/>
             <MessageFileModal/>
+            <CreateServerModal/>
+            <DeleteServerModal/>
             <DeleteMessageModal/>
         </>
     )

@@ -41,7 +41,7 @@ interface ChatMessagesProps{
 const roleIconMap = {
     "GUEST" : null,
     "MODERATOR" : <ShieldCheck className="h-4 w-4 ml-2 text-indigo-500"/>,
-    "ADMIN" : <Shield className="h-4 w-4 text-rose-500"/>
+    "ADMIN" : <Shield className="h-4 w-4 text-indigo-400"/>
 }
 
 const formSchema = z.object({

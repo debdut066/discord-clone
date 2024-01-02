@@ -17,7 +17,7 @@ export function LeaveServer(){
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false)
 
-    const isModalOpen = isOpen && type === "deleteServer";
+    const isModalOpen = isOpen && type === "leaveServer";
     const { server } = data;
 
     async function deleteServer(){
