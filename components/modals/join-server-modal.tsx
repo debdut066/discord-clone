@@ -2,7 +2,6 @@
 
 import * as z from "zod";
 import { useForm } from "react-hook-form";
-import { redirectToSignIn } from "@clerk/nextjs";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useModal } from "@/hooks/use-modal-store";
@@ -24,9 +23,8 @@ import {
     FormMessage
 } from "@/components/ui/form";
 import { Button } from "../ui/button";
-import { db } from "@/lib/db";
-import { currentProfile } from "@/lib/current_profile";
 import router from "next/router";
+import axios from "axios";
 
 const formSchema = z.object({
     link : z.string().min(1, {
@@ -53,31 +51,10 @@ export function JoinServer(){
             const urlString = values.link;
             const segments = urlString.split('/');
             const inviteCode = segments[segments.length - 1];
-
-            const profile = await currentProfile();
-
-            if (!profile) {
-                return redirectToSignIn();
-            }
+            const { data : server } = await axios.patch(`/api/servers/join/${inviteCode}`);
             
-            const server = await db.server.update({
-                where : {
-                    inviteCode  : inviteCode
-                },
-                data : {    
-                    members : {
-                        create : [
-                            {
-                                profileId : profile.id
-                            }
-                        ]
-                    }
-                }
-            })
-
             form.reset();
             router.push(`/servers/${server.id}`);
-
         } catch (error) {
             console.log(error);
         }
