@@ -13,7 +13,20 @@ const nextConfig = {
     return config;
   },
   images: {
-    domains: ["uploadthing.com", "utfs.io"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "uploadthing.com",
+      },
+      {
+        protocol: "https",
+        hostname: "utfs.io",
+      },
+      {
+        protocol: "https",
+        hostname: "img.clerk.com",
+      },
+    ],
   },
 };
 
