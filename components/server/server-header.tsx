@@ -1,6 +1,9 @@
 "use client"
+
 import { ServerWithMemberWithProfiles } from "@/types"
 import { MemberRole } from "@prisma/client"
+import { ChevronDown, LogOut, PlusCircle, Settings, Trash, UserPlus, Users } from "lucide-react";
+
 import { 
     DropdownMenu, 
     DropdownMenuContent, 
@@ -9,7 +12,6 @@ import {
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import { Button } from "../ui/button";
-import { ChevronDown, LogOut, PlusCircle, Settings, Trash, UserPlus, Users } from "lucide-react";
 import { useModal } from "@/hooks/use-modal-store";
 
 interface ServerHeaderProps {
@@ -65,7 +67,7 @@ export function ServerHeader({ server, role }: ServerHeaderProps) {
                     </DropdownMenuItem>
                 )}
 
-                {isAdmin && (
+                {isAdmin && isModerator && (
                     <DropdownMenuItem
                         className="px-3 py-2 text-sm cursor-pointer"
                         onClick={() => onOpen("createChannel", { server })}
@@ -84,8 +86,8 @@ export function ServerHeader({ server, role }: ServerHeaderProps) {
                         <Trash className="h-4 w-4 ml-auto"/>
                     </DropdownMenuItem>
                 )}
-                { isAdmin && <DropdownMenuSeparator/>}
-                { isAdmin && (
+                { !isAdmin && <DropdownMenuSeparator/>}
+                { !isAdmin && (
                     <DropdownMenuItem
                         className="text-rose-500 px-3 py-2 text-sm cursor-pointer"
                         onClick={() => onOpen("leaveServer", { server })}
