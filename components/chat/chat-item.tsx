@@ -19,6 +19,7 @@ import {
     FormField,
     FormItem,
 } from "@/components/ui/form";
+import { UserInfo } from "../user-info";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useModal } from "@/hooks/use-modal-store";
@@ -116,6 +117,7 @@ function ChatItem({
     const isImage = !isPDF && fileUrl; 
 
 
+
     return (
         <div className="relative group flex items-center hover:bg-black/5 p-4 transition w-full">
             <div className="group flex gap-x-2 items-start w-full">
@@ -125,9 +127,7 @@ function ChatItem({
                 <div className="flex flex-col w-full">
                     <div className="flex items-center gap-x-1">
                         <div className="flex items-center">
-                            <p className="font-semibold text-sm hover:underline cursor-pointer mr-1">
-                                {member.profile.name}
-                            </p>
+                            <UserInfo member={member}/>
                             <ActionTooltip label={member.role}>
                                 {roleIconMap[member.role]}
                             </ActionTooltip>
