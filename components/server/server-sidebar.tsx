@@ -1,6 +1,6 @@
 import React from 'react'
 import { ChannelType, MemberRole } from '@prisma/client'
-import { Hash, Mic, ShieldAlert, ShieldCheck, Video } from "lucide-react";
+import { Hash, Mic, ShieldAlert, ShieldCheck, User, Video } from "lucide-react";
 
 import { ServerHeader } from './server-header'
 import { ServerSearch } from './server-search'
@@ -12,6 +12,7 @@ import { ScrollArea } from '../ui/scroll-area'
 import { Separator } from '../ui/separator';
 import { ServerSection } from './server-section';
 import { ServerChannel } from './server-channel';
+import { UserSettings } from './user-settings';
 
 interface ServerSidebarProps {
     serverId : string;
@@ -69,7 +70,7 @@ export async function ServerSidebar ({ serverId } : ServerSidebarProps){
     const role = server?.members.find((member) => member.profileId === profile.id)?.role;
 
     return (
-        <div className='flex flex-col h-full text-primary w-full dark:bg-[#2B2D31] bg-[#F2F3F5]'>
+        <div className='flex flex-col relative h-full text-primary w-full dark:bg-[#2B2D31] bg-[#F2F3F5]'>
             <ServerHeader server={server} role={role}/>
             <ScrollArea className='flex-1 px-3'>
                 <div className='mt-2'>
@@ -199,6 +200,7 @@ export async function ServerSidebar ({ serverId } : ServerSidebarProps){
                     </div>
                 )}
             </ScrollArea>
+            <UserSettings/>
         </div>
     )
 }

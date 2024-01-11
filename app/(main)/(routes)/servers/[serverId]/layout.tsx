@@ -12,7 +12,6 @@ async function ServerIdLayout(
       params : { serverId : string }  
     }
 ){
-  
     const profile = await currentProfile();
 
     if(!profile){
