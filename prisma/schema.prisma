@@ -17,13 +17,28 @@ model Profile {
   name String
   imageUrl String @db.Text
   email String @db.Text
+  mute Boolean @default(false)
+  deafen Boolean @default(false)
 
   servers Server[]
   members Member[]
   channels Channel[]
+  friendRequester FriendRequest[] @relation("Requester")
+  friendReciver FriendRequest[] @relation("Recipient")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model FriendRequest {
+  id String @id  @default(uuid())
+  fromId String
+  from Profile @relation("Requester", fields: [fromId], references: [id], onDelete: Cascade)
+  toId String
+  to Profile @relation("Recipient", fields: [toId], references: [id], onDelete: Cascade)
+  
+  accepted Boolean @default(false)
+  createdAt DateTime @default(now())
 }
 
 model Server {
