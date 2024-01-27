@@ -11,31 +11,31 @@ export async function GET(req: NextResponse) {
             return new NextResponse("Unauthorized!!!", { status: 401 })
         }
 
-        // const friendRequest = await db.profile.findUnique({
-        //     where: {
-        //         id: profile.id,
-        //     },
-        //     include: {
-        //         friendReciver: {
-        //             include: {
-        //                 from: {
-        //                     select: {
-        //                         id: true,
-        //                         name: true,
-        //                         imageUrl: true
-        //                     }
-        //                 }
-        //             }
-        //         },
-        //     },
-        // })
-        console.log("profile", profile.id)
-        const friendRequest = await db.friendRequest.findMany({
+        const friendRequest = await db.profile.findUnique({
             where: {
-                toId: profile.id,
-                accepted: false
-            }
+                id: profile.id,
+            },
+            include: {
+                friendReciver: {
+                    include: {
+                        from: {
+                            select: {
+                                id: true,
+                                name: true,
+                                imageUrl: true
+                            }
+                        }
+                    }
+                },
+            },
         })
+        // console.log("profile", profile.id)
+        // const friendRequest = await db.friendRequest.findMany({
+        //     where: {
+        //         toId: profile.id,
+        //         accepted: false
+        //     }
+        // })
 
         return NextResponse.json(friendRequest);
 
