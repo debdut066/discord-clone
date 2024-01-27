@@ -10,6 +10,7 @@ export async function PATCH(
     try {
         const profile = await currentProfile();
         const { name, value } = await req.json();
+        console.log(name, value)
 
         if (!profile) {
             return new NextResponse("Unauthorized", { status: 401 });
@@ -19,16 +20,13 @@ export async function PATCH(
             return new NextResponse("user ID missing", { status: 400 });
         }
 
-        if (name === "general") {
-            return new NextResponse("Name cannot be 'general'", { status: 400 });
-        }
-
         const profileData = await db.profile.update({
             where: {
                 id: params.userId,
             },
             data: {
                 [name]: value
+                // mute: true
             }
         });
 
