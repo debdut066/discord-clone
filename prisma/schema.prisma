@@ -23,7 +23,7 @@ model Profile {
   servers Server[]
   members Member[]
   channels Channel[]
-  friends Profile[] @relation("Friends")
+  
   friendRequester FriendRequest[] @relation("Requester")
   friendReciver FriendRequest[] @relation("Recipient")
 
