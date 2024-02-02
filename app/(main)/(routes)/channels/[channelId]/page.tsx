@@ -16,7 +16,7 @@ export default function MyChannel(){
             (async ()=>{
                 const { data : response } = await axios.get('/api/friendRequest/pending');
                 console.log("response", response)
-                // setfriendData(response.friendReciver);
+                setfriendData(response.friendReciver);
             })()
         }
     },[friendRequestState])
@@ -24,8 +24,8 @@ export default function MyChannel(){
     return (
         <div className="flex flex-col bg-white dark:bg-[#313338] h-full">
             <DMHeader type={friendRequestState} setType={setfriendRequestState}/>
-            {/* { friendRequestState === "Add Friend" && <AddFriend/>}
-            <DMContent data={friendData} type={friendRequestState}/> */}
+            { friendRequestState === "Add Friend" && <AddFriend/>}
+            <DMContent data={friendData} type={friendRequestState}/>
         </div>
     )
 }
