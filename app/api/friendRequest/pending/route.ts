@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import { currentProfile } from "@/lib/current_profile";
 import { db } from "@/lib/db";
 
-export async function GET(req: NextResponse) {
+export async function GET() {
     try {
         const profile = await currentProfile();
 
@@ -29,13 +29,6 @@ export async function GET(req: NextResponse) {
                 },
             },
         })
-        // console.log("profile", profile.id)
-        // const friendRequest = await db.friendRequest.findMany({
-        //     where: {
-        //         toId: profile.id,
-        //         accepted: false
-        //     }
-        // })
 
         return NextResponse.json(friendRequest);
 
