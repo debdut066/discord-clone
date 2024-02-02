@@ -1,9 +1,9 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 import { currentProfile } from "@/lib/current_profile";
 import { db } from "@/lib/db";
 
-export async function POST(req: NextResponse) {
+export async function POST(req: NextRequest) {
     try {
         const { name } = await req.json();
         const profile = await currentProfile();
